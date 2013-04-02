@@ -1,0 +1,32 @@
+{% extends "cloturas/views/templates/base.html" %}
+
+
+
+{% block content %}
+
+{% if error %}
+<p>{{error}}</p>
+{% endif %}
+
+<form action="/" method="POST">
+  <label>Nombre completo:</label>
+  <input type="text" name="nombre" required placeholder="Pepito Pérez">
+  <label>Documento de identificación:</label>
+  <input type="text" name="nif" required placeholder="NIF/NIE">
+  <label>Direccion de e-Mail:</label>
+  <input type="email" name="email" placeholder="yo@ejemplo.es">
+  <label>Precio por consulta:</label>
+  <input type="number" name="precio_consulta" min="1" value="50.0" required>
+  <input type="submit" value="Nuevo Paciente">
+
+</form>
+
+<ul class="list">
+  {% for paciente in pacientes %}
+  <li>
+    {{paciente.nombre}} - {{paciente.nif}}
+  </li>
+  {% endfor %}
+</ul>
+
+{% endblock %}

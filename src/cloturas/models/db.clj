@@ -1,0 +1,42 @@
+(ns cloturas.models.db
+  (:use korma.core
+        [korma.db :only (defdb)])
+  (:require [cloturas.models.schema :as schema]))
+
+(defdb db schema/db-spec)
+
+(defentity users)
+
+(defn create-user [user]
+  (insert users
+          (values user)))
+
+(defn get-user [id]
+  (first (select users
+                 (where {:id id})
+                 (limit 1))))
+
+(defentity pacientes)
+
+(defn crea-paciente [paciente]
+  (insert pacientes
+          (values paciente)))
+
+(defn get-paciente [id]
+  (first (select pacientes
+                 (where {:id id})
+                 (limit 1))))
+
+(defn get-pacientes 
+  ([]
+     (select pacientes))
+  ([parcial]
+      (select pacientes 
+              (where 
+               {:nombre [like (str "%" parcial "%")]}))))
+
+;;(defentity facturas)
+;;(defn save-factura
+;; [paciente_id sesiones importe]
+;; (insert facturas
+;;         ()))

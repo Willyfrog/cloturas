@@ -1,0 +1,21 @@
+{% extends "cloturas/views/templates/base.html" %}
+
+{% block content %}
+
+{% if error %}
+<p>{{error}}</p>
+{% endif %}
+
+<form action="/f" method="POST">
+  {% for line in pacientes %}
+  <label>{{line.nombre}} - {{line.nif}}</label>
+  <input type="number" name="importe_sesion" value={{line.precio_consulta}} size="5"/><label>€</label>
+  <input type="number" name="num_sesiones" value="4" size="5"/>
+  <input type="hidden" name="paciente_id" value={{line.id}} />
+  <label>Total</label>
+  {% endfor %}
+  <input type="submit" value="Nuevo Paciente">
+
+</form>
+
+{% endblock %}
