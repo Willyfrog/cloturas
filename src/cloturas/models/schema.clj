@@ -49,7 +49,8 @@
     (sql/create-table
       :facturas
       [:id "INTEGER PRIMARY KEY AUTO_INCREMENT"]
-      [:fecha "DATE"]
+      [:mes "integer"]
+      [:anyo "integer"]
       [:paciente_id "integer"]
       [:num_sesiones "integer"]
       [:importe_sesion "decimal"])
@@ -59,5 +60,4 @@
 (defn create-tables
   "creates the database tables used by the application"
   []
-  (create-users-table) (crea-tabla-pacientes) (crea-tabla-facturas)
-)
+  (create-users-table) (crea-tabla-pacientes) (crea-tabla-facturas))

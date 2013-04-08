@@ -15,3 +15,10 @@
   (->>
     (io/slurp-resource filename)
     (md/md-to-html-string)))
+
+(defn default-month
+  "defaults to today's month and year as required by the input type month"
+  []
+  (let [today (new java.util.Date)]
+    (str  (+ 1900 (.getYear today)) "-" (format "%02d"  (.getMonth today)))))
+

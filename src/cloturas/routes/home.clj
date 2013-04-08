@@ -35,18 +35,28 @@
 
 (defn nueva-factura 
   []
-  (layout/render "nueva_factura.html" {:pacientes (db/get-pacientes)}))
+  (layout/render "nueva_factura.html" {:pacientes (db/get-pacientes) :default_month (util/default-month)}))
+
+(defn go-home-unregistered []
+  (session/flash-put! :error "Not logged in!")
+  (home-page))
 
 (defn check-logged-in
   [function]
   (if (session/get :user)
     (function)
-    (home-page)))
+    (go-home-unregistered)))
+
+(defn graba-factura
+  [mes anyo paciente_id num_sesiones importe_sesion]
+  (println (str "nueva factura m:" mes " a:" anyo " p:" paciente_id " s:" num_sesiones " :i" importe_sesion)))
 
 (defn crea-facturas
-  [parameters]
+  [{anyo-m "anyo" pacientes "paciente_id" sesiones "num_sesiones" importes "importe_sesion"}]
+  ;;[params]
   (println "Creando facturas con:")
-  (println parameters)
+  ;;(println "(map (fn [p, s, i] (graba-factura 1 1999 p s i)) " (str pacientes " " sesiones " " importes))
+  (map (fn [p, s, i] (graba-factura 1 1999 p s i)) pacientes sesiones importes)
   (nueva-factura))
 
 (defroutes home-routes

@@ -7,6 +7,7 @@
 {% endif %}
 
 <form action="/f" method="POST">
+  <input type="month" name="anyo" value={{default_month}} size="4">
   {% for line in pacientes %}
   <label>{{line.nombre}} - {{line.nif}}</label>
   <input type="number" name="importe_sesion" value={{line.precio_consulta}} size="5"/><label>€</label>
@@ -14,7 +15,7 @@
   <input type="hidden" name="paciente_id" value={{line.id}} />
   <label>Total</label>
   {% endfor %}
-  <input type="submit" value="Nuevo Paciente">
+  <input type="submit" value="Registrar facturas">
 
 </form>
 
